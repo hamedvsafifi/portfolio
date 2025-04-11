@@ -29,8 +29,8 @@ function SkillsList() {
       <h2 className="text-gray-700 dark:text-gray-300 text-3xl mb-4">
         Skills List
       </h2>
-      <div className="flex flex-col md:flex-row gap-4 md:gap-10 justify-around">
-        <div className="relative ">
+      <div className="flex flex-col md:flex-row gap-4 md:gap-10 mx-5 md:mx-0 justify-around">
+        <div className="relative">
           <h3 className="h3-skilllist">fundamental</h3>
           <ul className="ul-skilllist ">
             {skills.fundamental.map((skill, index) => (

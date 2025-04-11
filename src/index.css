@@ -4,6 +4,7 @@
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
+/* header */
 .btn-primary,
 .btn-secondary {
   @apply bg-blue-500 hover:bg-blue-700 text-white font-bold my-3 mx-1 py-1 px-3 rounded capitalize max-w-40;
@@ -13,6 +14,7 @@
   @apply bg-green-700 hover:bg-green-800;
 }
 
+/* skilllist */
 .h3-skilllist {
   @apply text-2xl capitalize mb-3;
 }
@@ -24,6 +26,11 @@
   --font-afifi: "Kantumruy Pro", "Markazi text", "PT Serif", "Roboto",
     "Space Grotesk";
 }
+
+.projectlistitem {
+  @apply flex flex-col gap-2 justify-around text-center items-center border-2  rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 w-full h-auto p-3;
+}
+
 .font-afifi {
   font-family: var(--font-afifi);
 }

@@ -1,36 +1,63 @@
 import ThemeToggle from "./ThemeToggle";
 import ScreenWidth from "./ScreenWidth";
-
+import useTabletDetection from "./useTabletDetection";
 // colors: #BFF0BF #C4CEE7
-function HeaderNav() {
+function HeaderNav({ handelPageChange, activePage }) {
   return (
     <div>
-      <Nav />
-      <Intro />
+      <Nav handelPageChange={handelPageChange} activePage={activePage} />
+      <Intro handelPageChange={handelPageChange} />
     </div>
   );
 }
 
-function Nav() {
+function Nav({ handelPageChange, activePage }) {
+  const isTablet = useTabletDetection();
+
   return (
     <div className="flex justify-between items-center ">
       <h4 className="text-blue-500 dark:text-[#BFF0BF] font-afifi uppercase text-2xl mr-5 relative right-2">
         afifi
       </h4>
-      <ul className="flex items-center justify-right md:justify-center gap-3 md:gap-10 capitalize ">
+      <ul className="flex items-center justify-right md:justify-center gap-3 md:gap-10 ">
         <li>
-          <a href="#home">home</a>
+          <button
+            className={`cursor-pointer capitalize  ${
+              activePage === "home"
+                ? " border-b-2 pb-[4px] border-blue-600  dark:border-blue-300"
+                : "hover:border-green-600 dark:hover:border-green-300 hover:border-b-2 hover:rounded-[2px]"
+            }`}
+            onClick={() => handelPageChange("home")}
+          >
+            home
+          </button>
+        </li>
+
+        <li>
+          <button
+            className={`cursor-pointer capitalize  ${
+              activePage === "projects"
+                ? " border-b-2 pb-[4px] border-blue-600 dark:border-blue-300"
+                : "hover:border-green-600 dark:hover:border-green-300 hover:border-b-2 hover:rounded-[2px]"
+            }`}
+            onClick={() => handelPageChange("projects")}
+          >
+            projects
+          </button>
         </li>
         <li>
-          <a href="#home">about</a>
+          <button
+            className={`cursor-pointer capitalize pb-[2px] ${
+              activePage === "contact"
+                ? " border-b-2 pb-[4px] border-blue-600 dark:border-blue-300"
+                : "hover:border-green-600 dark:hover:border-green-300 hover:border-b-2 hover:rounded-[2px]"
+            }`}
+            onClick={() => handelPageChange("contact")}
+          >
+            contact
+          </button>
         </li>
-        <li>
-          <a href="#home">projects</a>
-        </li>
-        <li>
-          <a href="#home">contact</a>
-        </li>
-        <li className="hidden md:block">
+        <li className={`hidden ${isTablet ? "hidden" : "md:block"}`}>
           <ThemeToggle />
         </li>
       </ul>
@@ -38,7 +65,7 @@ function Nav() {
   );
 }
 
-function Intro() {
+function Intro({ handelPageChange }) {
   const screenWidth = ScreenWidth().width;
   const isMobile = screenWidth < 640; // Adjust the breakpoint as needed
   return (
@@ -73,7 +100,12 @@ function Intro() {
               : "justify-center text-center items-center"
           } ${screenWidth < 350 ? "flex-row justify-center" : ""} gap-2`}
         >
-          <button className="btn-primary"> view projects</button>
+          <button
+            className="btn-primary"
+            onClick={() => handelPageChange("projects")}
+          >
+            view projects
+          </button>
           <button className="btn-secondary">download cv</button>
         </div>
       </div>
