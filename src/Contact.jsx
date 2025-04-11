@@ -1,4 +1,5 @@
 import React from "react";
+
 function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,6 +14,9 @@ function Contact() {
     try {
       const res = await fetch("/.netlify/functions/sendEmail", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(formData),
       });
 
@@ -20,7 +24,9 @@ function Contact() {
         alert("Message sent!");
         form.reset();
       } else {
-        alert("Failed to send message.");
+        const errorData = await res.json();
+        console.log("Server Error:", errorData);
+        alert("Failed to send message: " + errorData.error);
       }
     } catch (err) {
       console.error("Error:", err);
@@ -32,7 +38,7 @@ function Contact() {
     <div className="flex justify-center py-5 min-h-fit">
       <form
         onSubmit={handleSubmit}
-        className="  text-black dark:text-cyan-50 border-x-2 px-10 pb-4 rounded-lg shadow-lg border-sky-500 dark:border-sky-200 max-h-fit w-full max-w-[500px]"
+        className="text-black dark:text-cyan-50 border-x-2 px-10 pb-4 rounded-lg shadow-lg border-sky-500 dark:border-sky-200 max-h-fit w-full max-w-[500px]"
       >
         <div className="mb-4">
           <label htmlFor="name" className="block font-medium mb-2 text-base">

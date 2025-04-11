@@ -6,16 +6,17 @@ export const handler = async (event) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "your-email@gmail.com", // ✨ your Gmail
-      pass: "your-app-password", // ✨ app password from Google
+      user: "abnafify@gmail.com", // Replace with your Gmail address
+      pass: "muuj monb glzf ebup", // Replace with your app-specific password
     },
   });
 
   const mailOptions = {
-    from: data.email,
-    to: "your-email@gmail.com",
+    from: "abnafify@gmail.com", // Replace with your Gmail address
+    to: "abnafify@gmail.com", // Replace with the recipient's email
     subject: `Message from ${data.name}`,
-    text: data.message,
+    text: `From: ${data.email}\nMessage: ${data.message}`,
+    replyTo: data.email, // Allows replying directly to the sender
   };
 
   try {
