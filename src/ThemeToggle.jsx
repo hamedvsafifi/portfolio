@@ -44,7 +44,10 @@ const ThemeToggle = () => {
   };
 
   return (
-    <button onClick={handleToggle} className="button cursor-pointer">
+    <button
+      onClick={handleToggle}
+      className="button cursor-pointer translate-y-0.5 "
+    >
       {isDarkMode ? (
         <svg
           width="60"

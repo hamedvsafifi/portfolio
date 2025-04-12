@@ -1,15 +1,20 @@
-import React from "react"; // Optional: Add styles for the footer
-
+import React, { useState } from "react"; // Optional: Add styles for the footer
 function Footer() {
+  const [buyCoffee, setBuyCoffe] = useState(false);
+  function buyMeCoffee() {
+    setBuyCoffe(!buyCoffee);
+  }
   return (
     <footer className="footer text-center bg-green-50 text-black dark:text-white dark:bg-gray-900 py-4">
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:flex text-center justify-around items-center ">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:flex text-center justify-around items-center capitalize ">
         <p>&copy; {new Date().getFullYear()} Afifi. All rights reserved.</p>
 
-        <nav className="flex flex-row items-center justify-center gap-2">
-          <a href="/privacy-policy">Privacy Policy -</a>
-          <a href="/terms-of-service">Terms of Service -</a>
-          <a href="/contact">Contact Us</a>
+        <nav className="flex flex-row items-center justify-center gap-2 ">
+          <button onClick={buyMeCoffee} className="capitalize">
+            buy me a coffee
+            <div className="inline-block animate-bounce"> ☕</div>
+          </button>
+          <a href="mailto:hamed4businessh4b@gmail.com">Contact Me</a>
         </nav>
 
         <div className="flex flex-row justify-center items-center gap-2 md:gap-4">

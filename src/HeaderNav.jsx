@@ -101,12 +101,19 @@ function Intro({ handelPageChange }) {
           } ${screenWidth < 350 ? "flex-row justify-center" : ""} gap-2`}
         >
           <button
-            className="btn-primary"
+            className="cursor-pointer btn-primary"
             onClick={() => handelPageChange("projects")}
           >
             view projects
           </button>
-          <button className="btn-secondary">download cv</button>
+          <a
+            className="cursor-pointer btn-secondary"
+            href="https://www.dropbox.com/scl/fi/70jmo1hr367pwk2pugkih/Afifi_resume.pdf?rlkey=5p7c57fjo8k4ls6nzk2pb7eof&st=6ge910ji&dl=1"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            download cv
+          </a>
         </div>
       </div>
     </>
