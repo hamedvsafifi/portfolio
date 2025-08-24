@@ -11,24 +11,24 @@ const ProjectApiTest = [
   },
   {
     id: 2,
-    name: "Portfolio Site",
-    design: "https://placehold.co/200",
+    name: "Portfolio",
+    design: "projects_imgs/portfilo.png",
     brief: "A personal portfolio project",
     link: "https://afifi-portfolio.netlify.app/",
   },
   {
     id: 3,
-    name: "E-commerce App",
-    design: "https://placehold.co/200",
-    brief: "An online shopping platform",
-    link: "https://example.com/project3",
+    name: "Van Life",
+    design: "projects_imgs/vanlife.png",
+    brief: "An online shop for Vans",
+    link: "https://vanlife-afifi.netlify.app/",
   },
   {
     id: 4,
-    name: "Blog Platform",
-    design: "https://placehold.co/200",
-    brief: "A blogging platform for writers",
-    link: "https://example.com/project4",
+    name: "Note App",
+    design: "projects_imgs/noteapp.png",
+    brief: "a place to place your note",
+    link: "https://afifinoteapp.netlify.app/",
   },
   {
     id: 5,
@@ -73,7 +73,7 @@ function Projects() {
 
 function ProjectList() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-5 mt-5 justify-items-center  auto-rows-fr items-stretch">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-5 justify-items-center  auto-rows-fr items-stretch">
       {ProjectApiTest.map((project, num) => (
         <ProjectItem key={project.id} project={project} num={num} />
       ))}

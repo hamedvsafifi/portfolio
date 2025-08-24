@@ -35,10 +35,10 @@ function Contact() {
   };
 
   return (
-    <div className="flex justify-center py-5 min-h-fit">
+    <div className="flex justify-center pt-20 ">
       <form
         onSubmit={handleSubmit}
-        className="text-black dark:text-cyan-50 border-x-2 px-10 pb-4 rounded-lg shadow-lg border-sky-500 dark:border-sky-200 max-h-[500px] w-full max-w-[500px]"
+        className="text-black dark:text-cyan-50 border-x-2 px-10 rounded-lg shadow-lg border-sky-500 dark:border-sky-200 max-h-[400px] w-full max-w-[400px]"
       >
         <div className="mb-4">
           <label htmlFor="name" className="block font-medium mb-2 text-base">

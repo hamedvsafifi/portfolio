@@ -24,6 +24,18 @@ const skills = {
 };
 
 function SkillsList() {
+  const [skillColors, setSkillColors] = useState([]);
+
+  function updateSkillColor(index, color) {
+    setSkillColors((prevColors) => {
+      const newColors = [...prevColors];
+      newColors[index] = color;
+      sessionStorage.setItem("skillColors", JSON.stringify(newColors));
+      return newColors;
+    });
+  }
+
+  console.log("skillColors", skillColors);
   return (
     <div>
       <h2 className="text-gray-700 dark:text-gray-300 text-3xl mb-4">
@@ -34,7 +46,12 @@ function SkillsList() {
           <h3 className="h3-skilllist">fundamental</h3>
           <ul className="ul-skilllist ">
             {skills.fundamental.map((skill, index) => (
-              <SkillItem key={index} name={skill} />
+              <SkillItem
+                key={index}
+                index={index}
+                name={skill}
+                updateSkillColor={updateSkillColor}
+              />
             ))}
           </ul>
         </div>
@@ -43,7 +60,12 @@ function SkillsList() {
           <h3 className="h3-skilllist ">frontend</h3>
           <ul className="ul-skilllist ">
             {skills.frontend.map((skill, index) => (
-              <SkillItem key={index} name={skill} />
+              <SkillItem
+                key={index}
+                index={index}
+                name={skill}
+                updateSkillColor={updateSkillColor}
+              />
             ))}
           </ul>
         </div>
@@ -52,7 +74,12 @@ function SkillsList() {
 
           <ul className="ul-skilllist ">
             {skills.os.map((skill, index) => (
-              <SkillItem key={index} name={skill} />
+              <SkillItem
+                key={index}
+                index={index}
+                name={skill}
+                updateSkillColor={updateSkillColor}
+              />
             ))}
           </ul>
         </div>
@@ -61,9 +88,12 @@ function SkillsList() {
   );
 }
 
-function SkillItem({ name }) {
+function SkillItem({ name, index, updateSkillColor }) {
   // State to hold the current background color classes.
-  const [bgColor, setBgColor] = useState("bg-red-200 dark:bg-red-800");
+  let currSkillColors = JSON.parse(
+    sessionStorage.getItem("skillColors") || "[]"
+  );
+  const [bgColor, setBgColor] = useState(`${currSkillColors[index]}`);
 
   // Function to randomly choose a paired light/dark background.
   const randomColor = () => {
@@ -91,12 +121,14 @@ function SkillItem({ name }) {
   // useEffect sets an interval that updates the background color every 10 seconds.
   useEffect(() => {
     const interval = setInterval(() => {
-      setBgColor(randomColor());
-    }, 5000); // 10,000 ms = 10 seconds
+      let newColor = randomColor();
+      setBgColor(newColor);
+      updateSkillColor(index, newColor);
+    }, 5000); // 5,000 ms = 5 seconds
 
     // Cleanup interval on component unmount.
     return () => clearInterval(interval);
-  }, []); // Empty dependency array ensures this effect runs only once on mount.
+  }, [index, updateSkillColor]);
 
   return (
     <li

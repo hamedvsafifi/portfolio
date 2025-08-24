@@ -1,18 +1,18 @@
 import ThemeToggle from "./ThemeToggle";
-import ScreenWidth from "./ScreenWidth";
 import useTabletDetection from "./useTabletDetection";
+import { Link, useLocation } from "react-router-dom";
 // colors: #BFF0BF #C4CEE7
-function HeaderNav({ handelPageChange, activePage }) {
-  return (
-    <div>
-      <Nav handelPageChange={handelPageChange} activePage={activePage} />
-      <Intro handelPageChange={handelPageChange} />
-    </div>
-  );
-}
+// function HeaderNav({ activePage }) {
+//   return (
+//     <div>
+//       <Nav activePage={activePage} />
+//     </div>
+//   );
+// }
 
-function Nav({ handelPageChange, activePage }) {
+function Nav() {
   const isTablet = useTabletDetection();
+  const location = useLocation();
 
   return (
     <div className="flex justify-between items-center ">
@@ -21,41 +21,44 @@ function Nav({ handelPageChange, activePage }) {
       </h4>
       <ul className="flex items-center justify-right md:justify-center gap-3 md:gap-10 ">
         <li>
-          <button
-            className={`cursor-pointer capitalize  ${
-              activePage === "home"
-                ? " border-b-2 pb-[4px] border-blue-600  dark:border-blue-300"
-                : "hover:border-green-600 dark:hover:border-green-300 hover:border-b-2 hover:rounded-[2px]"
-            }`}
-            onClick={() => handelPageChange("home")}
-          >
-            home
-          </button>
+          <Link to="/">
+            <button
+              className={`cursor-pointer capitalize  ${
+                location.pathname === "/"
+                  ? " border-b-2 pb-[4px] border-blue-600  dark:border-blue-300"
+                  : "hover:border-green-600 dark:hover:border-green-300 hover:border-b-2 hover:rounded-[2px]"
+              }`}
+            >
+              home
+            </button>
+          </Link>
         </li>
 
         <li>
-          <button
-            className={`cursor-pointer capitalize  ${
-              activePage === "projects"
-                ? " border-b-2 pb-[4px] border-blue-600 dark:border-blue-300"
-                : "hover:border-green-600 dark:hover:border-green-300 hover:border-b-2 hover:rounded-[2px]"
-            }`}
-            onClick={() => handelPageChange("projects")}
-          >
-            projects
-          </button>
+          <Link to="/projects">
+            <button
+              className={`cursor-pointer capitalize  ${
+                location.pathname === "/projects"
+                  ? " border-b-2 pb-[4px] border-blue-600 dark:border-blue-300"
+                  : "hover:border-green-600 dark:hover:border-green-300 hover:border-b-2 hover:rounded-[2px]"
+              }`}
+            >
+              projects
+            </button>
+          </Link>
         </li>
         <li>
-          <button
-            className={`cursor-pointer capitalize pb-[2px] ${
-              activePage === "contact"
-                ? " border-b-2 pb-[4px] border-blue-600 dark:border-blue-300"
-                : "hover:border-green-600 dark:hover:border-green-300 hover:border-b-2 hover:rounded-[2px]"
-            }`}
-            onClick={() => handelPageChange("contact")}
-          >
-            contact
-          </button>
+          <Link to="/contact">
+            <button
+              className={`cursor-pointer capitalize pb-[2px] ${
+                location.pathname === "/contact"
+                  ? " border-b-2 pb-[4px] border-blue-600 dark:border-blue-300"
+                  : "hover:border-green-600 dark:hover:border-green-300 hover:border-b-2 hover:rounded-[2px]"
+              }`}
+            >
+              contact
+            </button>
+          </Link>
         </li>
         <li className={`hidden ${isTablet ? "hidden" : "md:block"}`}>
           <ThemeToggle />
@@ -65,58 +68,4 @@ function Nav({ handelPageChange, activePage }) {
   );
 }
 
-function Intro({ handelPageChange }) {
-  const screenWidth = ScreenWidth().width;
-  const isMobile = screenWidth < 640; // Adjust the breakpoint as needed
-  return (
-    <>
-      <div className="flex flex-col gap-5 ">
-        {isMobile ? (
-          <h1 className="text-5xl font-bold capitalize text-center pt-5 ">
-            <span className=" dark:text-[#BFF0BF] text-blue-500">
-              hi, i'm afifi
-            </span>
-            <br /> front-end <br /> developer
-          </h1>
-        ) : (
-          <h1 className="text-5xl font-bold capitalize text-center p-5">
-            <span className=" dark:text-[#BFF0BF] text-blue-500">
-              hi, i'm afifi,
-            </span>
-            front-end developer
-          </h1>
-        )}
-        <p
-          className={`dark:text-gray-400 text-gray-600  capitalize ${
-            isMobile ? "px-2 text-center" : "text-center"
-          }`}
-        >
-          ui lover | css margician
-        </p>
-        <div
-          className={`flex ${
-            isMobile
-              ? "flex-row justify-center"
-              : "justify-center text-center items-center"
-          } ${screenWidth < 350 ? "flex-row justify-center" : ""} gap-2`}
-        >
-          <button
-            className="cursor-pointer btn-primary"
-            onClick={() => handelPageChange("projects")}
-          >
-            view projects
-          </button>
-          <a
-            className="cursor-pointer btn-secondary"
-            href="https://www.dropbox.com/scl/fi/70jmo1hr367pwk2pugkih/Afifi_resume.pdf?rlkey=5p7c57fjo8k4ls6nzk2pb7eof&st=6ge910ji&dl=1"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            download cv
-          </a>
-        </div>
-      </div>
-    </>
-  );
-}
-export default HeaderNav;
+export default Nav;
